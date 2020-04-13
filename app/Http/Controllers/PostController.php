@@ -47,8 +47,20 @@ class PostController extends Controller
     {
     	$this->validate(request(), [
     		'title' => 'required|min:1|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     		'body' => 'required|min:1|max:2000'
     	]);
+
+        if (request()->image) {
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $imageName);
+
+            $post->update([
+                'image' => $imageName
+            ]);
+        }
+
+
 
     	$post->update([
     		'title' => request()->title,

@@ -1,4 +1,4 @@
-<form action="{{ route('posts.update', $post->id) }}" method="POST">
+<form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
 	@csrf
 	@method('PATCH')
 
@@ -18,6 +18,14 @@
 	</div>
 
 	<div class="form-group">
+		<label for="title">Post image</label>
+		<input type="file" name="image" class="form-control" value="{{ $post->image }}" required>
+		@if ($errors->has('image'))
+			<small class="text-danger">{{ $errors->first('image') }}</small>
+		@endif
+	</div>
+
+	<div class="form-group">
 		<label for="body">Post body</label>
 		<textarea 
 			class="form-control" 
@@ -26,7 +34,7 @@
 			rows="3"
 			placeholder="write post body here.."
 			required
-			style="resize: none;"> {{ $post->body }}</textarea>
+			style="resize: none;">{{ $post->body }}</textarea>
 
 		@if ($errors->has('body'))
 			<small class="text-danger">{{ $errors->first('body') }}</small>
