@@ -8,7 +8,6 @@ This is an experiment at making a blog with Laravel framework.
 Clone the reposetory
 ```
 git clone git@github.com:GustyCrocodile/Laravel_blog.git
-
 ```
 Copy the example env file and make the required configuration changes in the .env file
 
